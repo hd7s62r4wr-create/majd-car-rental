@@ -1,0 +1,13 @@
+{
+  "name": "majd-car-rental-location-sharing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MAJD Rent A Car live location sharing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
