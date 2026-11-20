@@ -7,6 +7,7 @@ app.use(express.json({ limit: "32kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
 const sessions = new Map();
+const bookings = new Map();
 const TTL_MS = 30 * 60 * 1000;
 const PORT = process.env.PORT || 3000;
 const OWNER_TOKEN = process.env.OWNER_TOKEN;
@@ -61,6 +62,33 @@ app.post("/api/sessions/:id/location", (req, res) => {
   res.json({ ok: true });
 });
 
+app.post("/api/bookings", (req, res) => {
+  cleanExpired();
+  const { sessionId, name, phone, vehicleType, pickupDate, returnDate, notes } = req.body || {};
+  const session = sessions.get(sessionId);
+  if (!session || !Number.isFinite(session.latitude) || !Number.isFinite(session.longitude)) {
+    return res.status(403).json({ error: "يلزم تفعيل الموقع الجغرافي قبل إرسال طلب الحجز" });
+  }
+  const cleanName = typeof name === "string" ? name.trim().slice(0, 100) : "";
+  const cleanPhone = typeof phone === "string" ? phone.replace(/[\\s-]/g, "").slice(0, 20) : "";
+  const allowedTypes = ["اقتصادية", "سيدان", "عائلية / SUV", "فاخرة", "لا يهم"];
+  if (!cleanName || !/^05\\d{8}$/.test(cleanPhone) || !allowedTypes.includes(vehicleType) ||
+      !/^\\d{4}-\\d{2}-\\d{2}$/.test(pickupDate || "") ||
+      !/^\\d{4}-\\d{2}-\\d{2}$/.test(returnDate || "") || returnDate < pickupDate) {
+    return res.status(400).json({ error: "تحقق من الاسم والجوال ونوع السيارة وتواريخ الإيجار" });
+  }
+  const id = crypto.randomUUID();
+  const booking = {
+    id, name: cleanName, phone: cleanPhone, vehicleType,
+    pickupDate, returnDate,
+    notes: typeof notes === "string" ? notes.trim().slice(0, 500) : "",
+    sessionId, latitude: session.latitude, longitude: session.longitude,
+    createdAt: Date.now()
+  };
+  bookings.set(id, booking);
+  res.status(201).json({ ok: true, bookingId: id });
+});
+
 app.post("/api/sessions/:id/stop", (req, res) => {
   const session = sessions.get(req.params.id);
   if (session) sessions.delete(req.params.id);
@@ -75,6 +103,17 @@ app.get("/api/owner/sessions", ownerOnly, (_req, res) => {
       ({ id, createdAt, updatedAt, latitude, longitude, accuracy }));
   res.set("Cache-Control", "no-store");
   res.json({ sessions: active });
+});
+
+app.get("/api/owner/bookings", ownerOnly, (_req, res) => {
+  res.set("Cache-Control", "no-store");
+  const items = [...bookings.values()].sort((a, b) => b.createdAt - a.createdAt);
+  res.json({ bookings: items });
+});
+
+app.delete("/api/owner/bookings/:id", ownerOnly, (req, res) => {
+  bookings.delete(req.params.id);
+  res.json({ ok: true });
 });
 
 app.delete("/api/owner/sessions/:id", ownerOnly, (req, res) => {
