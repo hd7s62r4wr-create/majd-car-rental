@@ -17,7 +17,7 @@ header{background:linear-gradient(125deg,#101d35,#20395f);color:white;padding:18
 .hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.4fr .8fr;gap:35px;align-items:center}.eyebrow{color:var(--gold);font-size:13px;font-weight:bold}.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.35;margin:13px 0}.hero p{color:#dce3ed;line-height:2;max-width:620px;font-size:15px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 .btn{border:0;border-radius:12px;padding:14px 20px;font-weight:bold;display:inline-flex;justify-content:center;align-items:center;gap:8px}.btn-gold{background:var(--gold);color:#172033}.btn-outline{border:1px solid #ffffff66;color:white;background:#ffffff0d}.hero-note{border:1px solid #ffffff2b;border-radius:18px;padding:22px;background:#ffffff0c}.hero-note strong{display:block;color:var(--gold);font-size:19px;margin-bottom:8px}.hero-note p{font-size:13px;margin:0}
 main{max-width:1100px;margin:0 auto;padding:0 18px}.section{padding:48px 0}.section-head{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:22px}.section-head h2{font-size:25px;margin:0 0 8px}.section-head p{color:var(--muted);font-size:13px;line-height:1.8;margin:0}.tag{font-size:11px;color:#8a672d;background:#f5ecd9;padding:7px 11px;border-radius:30px;white-space:nowrap}
-.offer-empty{background:white;border:1px dashed #d7dce5;border-radius:20px;padding:34px 22px;text-align:center}.empty-icon{width:58px;height:58px;border-radius:17px;background:#f5ecd9;color:#8a672d;display:grid;place-items:center;margin:0 auto 15px;font-size:27px}.offer-empty h3{margin:0 0 9px;font-size:19px}.offer-empty p{color:var(--muted);font-size:13px;line-height:1.9;max-width:570px;margin:0 auto}
+.booking-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field label{font-size:13px;font-weight:bold}.field input,.field select,.field textarea{width:100%;border:1px solid #dce1e9;border-radius:10px;padding:12px;font:inherit;background:white}.field textarea{min-height:84px;resize:vertical}.field.full{grid-column:1/-1}.form-note{font-size:12px;line-height:1.8;color:var(--muted)}.offer-empty{background:white;border:1px dashed #d7dce5;border-radius:20px;padding:34px 22px;text-align:center}.empty-icon{width:58px;height:58px;border-radius:17px;background:#f5ecd9;color:#8a672d;display:grid;place-items:center;margin:0 auto 15px;font-size:27px}.offer-empty h3{margin:0 0 9px;font-size:19px}.offer-empty p{color:var(--muted);font-size:13px;line-height:1.9;max-width:570px;margin:0 auto}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature{background:white;border:1px solid #e7eaf0;border-radius:17px;padding:22px}.feature-icon{font-size:24px;margin-bottom:13px}.feature h3{font-size:16px;margin:0 0 8px}.feature p{font-size:13px;line-height:1.9;color:var(--muted);margin:0}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.step{background:#fff;border-radius:16px;padding:20px;border:1px solid #e7eaf0}.num{color:#9b7737;font-weight:bold;font-size:13px}.step h3{font-size:15px;margin:9px 0}.step p{font-size:12px;line-height:1.8;color:var(--muted);margin:0}
 .location-panel{background:linear-gradient(130deg,#101d35,#1b3152);color:white;border-radius:20px;padding:27px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}.location-panel h2{font-size:20px;margin:0 0 8px}.location-panel p{color:#dce3ed;font-size:13px;line-height:1.9;margin:0;max-width:700px}
@@ -26,12 +26,12 @@ main{max-width:1100px;margin:0 auto;padding:0 18px}.section{padding:48px 0}.sect
 #map{height:55vh;min-height:340px;border-radius:14px;margin-top:16px}.session{padding:14px 0;border-bottom:1px solid #edf0f4}.session:last-child{border:0}
 .stop{background:#a92c36;color:white;border:0;border-radius:10px;padding:11px 14px;margin-top:10px;width:100%}.hidden{display:none!important}
 footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font-size:12px;margin-top:38px}footer strong{color:var(--gold)}
-@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero{padding:46px 18px}.hero-note{max-width:500px}.navlinks{width:100%;justify-content:space-between;gap:9px;font-size:11px}.grid,.steps{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.location-panel{grid-template-columns:1fr}.location-panel .btn{width:100%}}
+@media(max-width:600px){.booking-form{grid-template-columns:1fr}.field.full{grid-column:auto}}\n@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero{padding:46px 18px}.hero-note{max-width:500px}.navlinks{width:100%;justify-content:space-between;gap:9px;font-size:11px}.grid,.steps{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.location-panel{grid-template-columns:1fr}.location-panel .btn{width:100%}}
 </style>
 </head>
 <body>
 <div class="topbar">مجد لتأجير السيارات · تجربة تأجير أوضح وأسهل</div>
-<header><div class="nav"><div><div class="brand">MAJD RENT A CAR</div><div class="brand-ar">مجد لتأجير السيارات</div></div><nav class="navlinks"><a href="#offers">عروض السيارات</a><a href="#services">خدماتنا</a><a href="#steps">طريقة الاستئجار</a><a href="#location">الموقع</a></nav></div></header>
+<header><div class="nav"><div><div class="brand">MAJD RENT A CAR</div><div class="brand-ar">مجد لتأجير السيارات</div></div><nav class="navlinks"><a href="#offers">عروض السيارات</a><a href="#booking">اطلب سيارة</a><a href="#services">خدماتنا</a><a href="#steps">طريقة الاستئجار</a><a href="#location">الموقع</a></nav></div></header>
 <section class="hero"><div class="hero-inner"><div><div class="eyebrow">رحلتك تبدأ من هنا</div><h1>سيارتك المناسبة،<br><span style="color:var(--gold)">بخطوات أسهل</span></h1><p>استعرض عروض السيارات وخيارات التأجير، وتعرّف على خدمات مجد. عند بدء طلب الحجز سنطلب إذن الموقع الجغرافي حتى نتمكن من معرفة موقعك بموافقتك.</p><div class="hero-actions"><a class="btn btn-gold" href="#offers">استعرض عروض السيارات</a><a class="btn btn-outline" href="#services">اكتشف خدماتنا</a></div></div><div class="hero-note"><strong>مجد | MAJD</strong><p>موقع إلكتروني لتصفح عروض تأجير السيارات والتعرّف على خدمات التأجير. لا تحتاج إلى تحميل تطبيق.</p></div></div></section>
 <main>
 <section class="section" id="offers"><div class="section-head"><div><h2>عروض السيارات</h2><p>اختر الفئة المناسبة لك وتابع أحدث عروض التأجير.</p></div><span class="tag">العروض تُحدّث باستمرار</span></div>
@@ -50,7 +50,7 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <div class="step"><div class="num">الخطوة 03</div><h3>فعّل الموقع وأرسل الطلب</h3><p>عند متابعة الحجز، اسمح للمتصفح بتحديد موقعك لإكمال الطلب.</p></div>
 </div></section>
 <section class="section" id="location"><div class="location-panel"><div><h2>تحديد الموقع ضمن خطوات الحجز</h2><p>يمكنك تصفح الموقع والعروض دون مشاركة موقعك. عند إضافة نموذج الحجز سيصبح تفعيل الموقع شرطاً للمتابعة، وسيطلب المتصفح إذنك أولاً. هذا الزر الآن لتجربة مشاركة الموقع فقط. يمكنك إيقاف المشاركة في أي وقت.</p></div><button id="start" class="btn btn-gold">تجربة تحديد الموقع الآن</button></div><div id="visitorStatus" role="status">لم يتم طلب موقعك بعد.</div><button id="stop" class="stop hidden">إيقاف مشاركة موقعي</button></section>
-<section id="owner" class="panel hidden"><h2>لوحة متابعة المواقع</h2><p style="color:var(--muted);font-size:13px;line-height:1.8">المشاركات النشطة فقط. تنتهي الجلسة تلقائياً بعد 30 دقيقة من آخر تحديث، ولا يُحتفظ بسجل تاريخي.</p><div id="ownerStatus">جارٍ تحميل المشاركات…</div><div id="map"></div><div id="sessions"></div></section>
+<section id="owner" class="panel hidden"><h2>لوحة متابعة المواقع</h2><p style="color:var(--muted);font-size:13px;line-height:1.8">المشاركات النشطة فقط. تنتهي الجلسة تلقائياً بعد 30 دقيقة من آخر تحديث، ولا يُحتفظ بسجل تاريخي.</p><div id="ownerStatus">جارٍ تحميل المشاركات…</div><div id="map"></div><div id="sessions"></div><h3>طلبات الحجز الواردة</h3><div id="bookingList"></div></section>
 </main>
 <footer><strong>MAJD RENT A CAR</strong><br>مجد لتأجير السيارات · تصفح العروض دون مشاركة الموقع، وشارك موقعك فقط عند متابعة الحجز.</footer>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -59,7 +59,31 @@ const $=id=>document.getElementById(id);
 let watchId=null,sessionId=null,ownerToken=null,ownerMap=null,markers=new Map(),poller=null;
 function status(message){$("visitorStatus").textContent=message}
 async function post(url,body){const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})});if(!r.ok)throw new Error("تعذر إكمال الطلب");return r.json()}
-$("start").addEventListener("click",async()=>{
+
+$("bookingForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const form=$("bookingForm");
+ if(!form.reportValidity())return;
+ if(!window.isSecureContext||!navigator.geolocation){$("bookingStatus").textContent="يلزم متصفح يدعم تحديد الموقع وفتح الموقع عبر HTTPS.";return}
+ const button=$("submitBooking");button.disabled=true;$("bookingStatus").textContent="نطلب إذن الموقع من المتصفح…";
+ navigator.geolocation.getCurrentPosition(async pos=>{
+  try{
+   const created=await post("/api/sessions");sessionId=created.id;
+   await post("/api/sessions/"+sessionId+"/location",{latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:pos.coords.accuracy});
+   const payload={sessionId,name:$("customerName").value,phone:$("customerPhone").value,vehicleType:$("vehicleType").value,pickupDate:$("pickupDate").value,returnDate:$("returnDate").value,notes:$("bookingNotes").value};
+   const result=await post("/api/bookings",payload);
+   $("bookingStatus").textContent="وصل طلبك بنجاح. رقم الطلب: "+result.bookingId+" — سنتواصل معك لتأكيد التفاصيل.";
+   form.reset();$("stop").classList.remove("hidden");
+   watchId=navigator.geolocation.watchPosition(async p=>{
+    try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}catch(e){}
+   },()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:20000});
+  }catch(e){$("bookingStatus").textContent=e.message||"تعذر إرسال الطلب. حاول مرة أخرى.";if(sessionId){try{await post("/api/sessions/"+sessionId+"/stop")}catch(_){}}sessionId=null}
+  button.disabled=false;
+ },err=>{const messages={1:"رفضت إذن الموقع؛ لم يُرسل طلب الحجز. فعّل الموقع إذا رغبت بالمتابعة.",2:"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.",3:"انتهت مهلة تحديد الموقع. حاول مرة أخرى."};$("bookingStatus").textContent=messages[err.code]||"تعذر تحديد الموقع.";button.disabled=false},{enableHighAccuracy:true,maximumAge:0,timeout:20000});
+});
+$("pickupDate").min=new Date().toISOString().slice(0,10);
+$("pickupDate").addEventListener("change",()=>{$("returnDate").min=$("pickupDate").value;if($("returnDate").value&&$("returnDate").value<$("pickupDate").value)$("returnDate").value=$("pickupDate").value});
+\n$("start").addEventListener("click",async()=>{
  if(!window.isSecureContext){status("يلزم فتح الموقع عبر اتصال آمن HTTPS لتفعيل تحديد الموقع.");return}
  if(!navigator.geolocation){status("متصفحك لا يدعم تحديد الموقع.");return}
  $("start").disabled=true;status("بانتظار إذن الموقع من المتصفح…");
@@ -86,14 +110,14 @@ function ownerFetch(url,opts={}){return fetch(url,{...opts,headers:{...(opts.hea
 async function refreshOwner(){
  try{
   const r=await ownerFetch("/api/owner/sessions");if(!r.ok)throw new Error();const data=await r.json();
-  $("ownerStatus").textContent=data.sessions.length?"عدد المشاركات النشطة: "+data.sessions.length:"لا توجد مشاركات نشطة حالياً.";
+  $("ownerStatus").textContent=data.sessions.length?"عدد المشاركات النشطة: "+data.sessions.length:"لا توجد مشاركات نشطة حالياً.";\n  const br=await ownerFetch("/api/owner/bookings");const bd=br.ok?await br.json():{bookings:[]};$("bookingList").innerHTML="";bd.bookings.forEach(b=>{const el=document.createElement("div");el.className="session";const details=document.createElement("div");details.textContent=b.name+" · "+b.phone+" · "+b.vehicleType+" · "+b.pickupDate+" إلى "+b.returnDate;const loc=document.createElement("a");loc.href="https://www.openstreetmap.org/?mlat="+encodeURIComponent(b.latitude)+"&mlon="+encodeURIComponent(b.longitude)+"#map=16/"+b.latitude+"/"+b.longitude;loc.target="_blank";loc.rel="noopener";loc.textContent="عرض موقع الطلب على الخريطة";const del=document.createElement("button");del.className="stop";del.textContent="حذف الطلب";del.addEventListener("click",async()=>{await ownerFetch("/api/owner/bookings/"+b.id,{method:"DELETE"});refreshOwner()});el.append(details,loc,del);$("bookingList").append(el)});
   const alive=new Set();data.sessions.forEach(s=>{alive.add(s.id);const point=[s.latitude,s.longitude];if(!markers.has(s.id)){markers.set(s.id,L.marker(point).addTo(ownerMap))}else markers.get(s.id).setLatLng(point);markers.get(s.id).bindPopup("آخر تحديث: "+new Date(s.updatedAt).toLocaleString("ar-SA"))});
   for(const [id,m] of markers)if(!alive.has(id)){ownerMap.removeLayer(m);markers.delete(id)}
   $("sessions").innerHTML="";data.sessions.forEach(s=>{const el=document.createElement("div");el.className="session";const time=document.createElement("small");time.textContent="آخر تحديث: "+new Date(s.updatedAt).toLocaleString("ar-SA");const btn=document.createElement("button");btn.className="stop";btn.textContent="إنهاء هذه المشاركة";btn.addEventListener("click",async()=>{await ownerFetch("/api/owner/sessions/"+s.id,{method:"DELETE"});refreshOwner()});el.append(time,btn);$("sessions").append(el)});
   if(data.sessions.length===1)ownerMap.setView([data.sessions[0].latitude,data.sessions[0].longitude],15);else if(data.sessions.length>1){const group=L.featureGroup([...markers.values()]);ownerMap.fitBounds(group.getBounds().pad(.2))}
  }catch(e){$("ownerStatus").textContent="تعذر الوصول إلى لوحة المتابعة. تحقق من رابط المالك."}
 }
-function openOwner(token){ownerToken=token;$("owner").classList.remove("hidden");$("location").classList.add("hidden");$("offers").classList.add("hidden");$("services").classList.add("hidden");$("steps").classList.add("hidden");ownerMap=L.map("map").setView([24.7,46.7],5);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(ownerMap);history.replaceState(null,"",location.pathname);refreshOwner();poller=setInterval(refreshOwner,5000)}
+function openOwner(token){ownerToken=token;$("owner").classList.remove("hidden");$("booking").classList.add("hidden");$("location").classList.add("hidden");$("offers").classList.add("hidden");$("services").classList.add("hidden");$("steps").classList.add("hidden");ownerMap=L.map("map").setView([24.7,46.7],5);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(ownerMap);history.replaceState(null,"",location.pathname);refreshOwner();poller=setInterval(refreshOwner,5000)}
 const token=location.hash.startsWith("#")?decodeURIComponent(location.hash.slice(1)):"";if(token.length>=32)openOwner(token);
 </script>
 </body></html>
