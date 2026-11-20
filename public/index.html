@@ -36,6 +36,15 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <main>
 <section class="section" id="offers"><div class="section-head"><div><h2>عروض السيارات</h2><p>اختر الفئة المناسبة لك وتابع أحدث عروض التأجير.</p></div><span class="tag">العروض تُحدّث باستمرار</span></div>
 <div class="offer-empty"><div class="empty-icon">🚘</div><h3>نعمل على إضافة السيارات والعروض</h3><p>لم تُضف سيارات متاحة للحجز حتى الآن. سنعرض هنا صور السيارات، الموديل، سعر اليوم والأسبوع والشهر، وشروط كل عرض فور تزويدنا ببيانات السيارات والأسعار الفعلية.</p></div></section>
+<section class="section" id="booking"><div class="section-head"><div><h2>اطلب سيارة</h2><p>أرسل طلبك وسنتواصل معك لتأكيد توفر السيارة والسعر. هذا طلب مبدئي وليس حجزاً مؤكداً.</p></div><span class="tag">الموقع مطلوب للإرسال</span></div><div class="panel" style="margin:0"><form id="bookingForm" class="booking-form">
+<div class="field"><label for="customerName">الاسم الكامل</label><input id="customerName" name="name" autocomplete="name" required maxlength="100" placeholder="اكتب اسمك"></div>
+<div class="field"><label for="customerPhone">رقم الجوال السعودي</label><input id="customerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="05[0-9]{8}" required placeholder="05xxxxxxxx"></div>
+<div class="field"><label for="vehicleType">نوع السيارة المطلوب</label><select id="vehicleType" name="vehicleType" required><option value="">اختر الفئة</option><option>اقتصادية</option><option>سيدان</option><option>عائلية / SUV</option><option>فاخرة</option><option>لا يهم</option></select></div>
+<div class="field"><label for="pickupDate">تاريخ الاستلام</label><input id="pickupDate" name="pickupDate" type="date" required></div>
+<div class="field"><label for="returnDate">تاريخ التسليم</label><input id="returnDate" name="returnDate" type="date" required></div>
+<div class="field full"><label for="bookingNotes">ملاحظات إضافية (اختياري)</label><textarea id="bookingNotes" name="notes" maxlength="500" placeholder="مثلاً: وقت الاستلام أو طلبات خاصة"></textarea></div>
+<div class="field full"><p class="form-note">بالضغط على إرسال الطلب، سيطلب المتصفح إذنك لتحديد موقعك. لن يُرسل الطلب إذا لم تسمح بالموقع. تُستخدم الإحداثيات لإظهار موقع الطلب في لوحة المالك. الطلب لا يعني تأكيد توفر السيارة أو السعر.</p><button id="submitBooking" class="btn btn-gold" type="submit">تحديد موقعي وإرسال طلب الحجز</button><div id="bookingStatus" role="status" class="form-note"></div></div>
+</form></div></section>
 <section class="section" id="services"><div class="section-head"><div><h2>خدمات التأجير</h2><p>الأقسام الأساسية التي يحتاجها العميل قبل استئجار السيارة.</p></div></div><div class="grid">
 <div class="feature"><div class="feature-icon">🚗</div><h3>تأجير يومي وأسبوعي</h3><p>خيارات مرنة لمدة الإيجار، مع توضيح السعر والمدة قبل تأكيد الطلب.</p></div>
 <div class="feature"><div class="feature-icon">📅</div><h3>طلبات الحجز</h3><p>اختيار السيارة ومدة الإيجار وموعد الاستلام، ثم إرسال طلب الحجز بعد استكمال البيانات المطلوبة.</p></div>
