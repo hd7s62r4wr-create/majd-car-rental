@@ -177,7 +177,16 @@ $("requestBookingLocation").addEventListener("click",()=>{
    await post("/api/sessions/"+sessionId+"/location",{latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:pos.coords.accuracy});
    $("locationGate").classList.add("hidden");
    $("bookingForm").classList.remove("hidden");
-   $("bookingStatus").textContent="تم تحديد موقعك. أكمل بيانات الحجز لإرسال الطلب.";
+   $("bookingStatus").textContent="تم تفعيل مشاركة موقعك. أكمل بيانات الحجز لإرسال الطلب.";
+   $("stop").classList.remove("hidden");
+   if(watchId===null){
+    watchId=navigator.geolocation.watchPosition(async p=>{
+     try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}
+     catch(e){$("bookingStatus").textContent="تعذر تحديث موقعك حالياً. تحقق من الاتصال بالإنترنت."}
+    },err=>{
+     $("bookingStatus").textContent="توقف تحديث الموقع. تحقق من إذن الموقع والاتصال.";
+    },{enableHighAccuracy:true,maximumAge:3000,timeout:20000});
+   }
   }catch(e){message.textContent=e.message||"تعذر حفظ موقعك. حاول مرة أخرى.";button.disabled=false}
  },err=>{
   const messages={1:"لم تسمح بمشاركة الموقع. لن تتمكن من إدخال بيانات الحجز حتى تسمح به.",2:"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.",3:"انتهت مهلة تحديد الموقع. حاول مرة أخرى."};
@@ -195,9 +204,11 @@ $("bookingForm").addEventListener("submit",async event=>{
   const result=await post("/api/bookings",payload);
   $("bookingStatus").textContent="وصل طلبك بنجاح. رقم الطلب: "+result.bookingId+" — سنتواصل معك لتأكيد التفاصيل.";
   form.reset();$("stop").classList.remove("hidden");
-  watchId=navigator.geolocation.watchPosition(async p=>{
-   try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}catch(e){}
-  },()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:20000});
+  if(watchId===null){
+   watchId=navigator.geolocation.watchPosition(async p=>{
+    try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}catch(e){}
+   },()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:20000});
+  }
  }catch(e){$("bookingStatus").textContent=e.message||"تعذر إرسال الطلب. حاول مرة أخرى."}
  button.disabled=false;
 });
