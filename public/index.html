@@ -49,7 +49,7 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <div class="step"><div class="num">الخطوة 02</div><h3>حدد مدة الإيجار</h3><p>اختر تاريخ الاستلام والتسليم وراجع شروط التأجير.</p></div>
 <div class="step"><div class="num">الخطوة 03</div><h3>فعّل الموقع وأرسل الطلب</h3><p>عند متابعة الحجز، اسمح للمتصفح بتحديد موقعك لإكمال الطلب.</p></div>
 </div></section>
-<section class="section" id="location"><div class="location-panel"><div><h2>الموقع مطلوب عند متابعة الحجز</h2><p>يمكنك تصفح الموقع والعروض دون مشاركة موقعك. عند تفعيل هذه الخطوة سيطلب المتصفح إذنك، وإذا رفضت فلن تتمكن من متابعة طلب الحجز. يمكنك إيقاف مشاركة الموقع في أي وقت.</p></div><button id="start" class="btn btn-gold">تفعيل الموقع للمتابعة</button></div><div id="visitorStatus" role="status">لم يتم طلب موقعك بعد.</div><button id="stop" class="stop hidden">إيقاف مشاركة موقعي</button></section>
+<section class="section" id="location"><div class="location-panel"><div><h2>تحديد الموقع ضمن خطوات الحجز</h2><p>يمكنك تصفح الموقع والعروض دون مشاركة موقعك. عند إضافة نموذج الحجز سيصبح تفعيل الموقع شرطاً للمتابعة، وسيطلب المتصفح إذنك أولاً. هذا الزر الآن لتجربة مشاركة الموقع فقط. يمكنك إيقاف المشاركة في أي وقت.</p></div><button id="start" class="btn btn-gold">تجربة تحديد الموقع الآن</button></div><div id="visitorStatus" role="status">لم يتم طلب موقعك بعد.</div><button id="stop" class="stop hidden">إيقاف مشاركة موقعي</button></section>
 <section id="owner" class="panel hidden"><h2>لوحة متابعة المواقع</h2><p style="color:var(--muted);font-size:13px;line-height:1.8">المشاركات النشطة فقط. تنتهي الجلسة تلقائياً بعد 30 دقيقة من آخر تحديث، ولا يُحتفظ بسجل تاريخي.</p><div id="ownerStatus">جارٍ تحميل المشاركات…</div><div id="map"></div><div id="sessions"></div></section>
 </main>
 <footer><strong>MAJD RENT A CAR</strong><br>مجد لتأجير السيارات · تصفح العروض دون مشاركة الموقع، وشارك موقعك فقط عند متابعة الحجز.</footer>
@@ -67,14 +67,14 @@ $("start").addEventListener("click",async()=>{
   try{
    const created=await post("/api/sessions");sessionId=created.id;
    await post("/api/sessions/"+sessionId+"/location",{latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:pos.coords.accuracy});
-   status("تم تفعيل الموقع. يمكنك متابعة طلب الحجز، ومشاركة الموقع مستمرة ما دامت الصفحة مفتوحة.");
+   status("تم تفعيل مشاركة الموقع التجريبية. عند إضافة نموذج الحجز ستصبح موافقة الموقع شرطاً لإرساله.");
    $("start").classList.add("hidden");$("stop").classList.remove("hidden");
    watchId=navigator.geolocation.watchPosition(async p=>{
     try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy});status("موقعك مفعّل. آخر تحديث: "+new Date().toLocaleTimeString("ar-SA"))}
     catch(e){status("انقطع الاتصال بالخادم. تحقق من الإنترنت.");}
    },err=>{status("تعذر تحديث موقعك. تحقق من إذن الموقع والإنترنت.");stopShare()}, {enableHighAccuracy:true,maximumAge:3000,timeout:15000});
   }catch(e){status("تعذر بدء مشاركة الموقع. حاول مرة أخرى.");$("start").disabled=false}
- },err=>{status(err.code===1?"رفضت إذن الموقع. لن تتمكن من متابعة طلب الحجز دون تفعيله.":"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.");$("start").disabled=false},{enableHighAccuracy:true,maximumAge:0,timeout:15000});
+ },err=>{status(err.code===1?"رفضت إذن الموقع. لن يُسمح بإرسال طلب الحجز مستقبلاً دون تفعيله.":"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.");$("start").disabled=false},{enableHighAccuracy:true,maximumAge:0,timeout:15000});
 });
 async function stopShare(){
  if(watchId!==null)navigator.geolocation.clearWatch(watchId);watchId=null;
