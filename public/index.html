@@ -27,7 +27,60 @@ main{max-width:1100px;margin:0 auto;padding:0 18px}.section{padding:48px 0}.sect
 .stop{background:#a92c36;color:white;border:0;border-radius:10px;padding:11px 14px;margin-top:10px;width:100%}.hidden{display:none!important}
 footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font-size:12px;margin-top:38px}footer strong{color:var(--gold)}
 .car-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.car-card{overflow:hidden;background:#fff;border:1px solid #e6e9ef;border-radius:18px;box-shadow:0 8px 24px #14213a0b}.car-card img{display:block;width:100%;height:185px;object-fit:cover;background:#e9edf2}.car-body{padding:17px}.car-body h3{font-size:18px;margin:12px 0 7px}.car-body p{font-size:12px;color:var(--muted);margin:0 0 14px}.car-price{display:flex;align-items:baseline;gap:7px}.car-price strong{font-size:21px;color:#8a672d}.car-price span,.car-rates{font-size:12px;color:var(--muted)}.car-rates{margin:7px 0 15px}.car-book{width:100%;font-size:13px;padding:11px}
-@media(max-width:600px){.car-grid{grid-template-columns:1fr}.booking-form{grid-template-columns:1fr}.field.full{grid-column:auto}}\n@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero{padding:46px 18px}.hero-note{max-width:500px}.navlinks{width:100%;justify-content:space-between;gap:9px;font-size:11px}.grid,.steps{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.location-panel{grid-template-columns:1fr}.location-panel .btn{width:100%}}
+@media(max-width:600px){.car-grid{grid-template-columns:1fr}.booking-form{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero{padding:46px 18px}.hero-note{max-width:500px}.navlinks{width:100%;justify-content:space-between;gap:9px;font-size:11px}.grid,.steps{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.location-panel{grid-template-columns:1fr}.location-panel .btn{width:100%}}
+
+/* Refined, responsive rental storefront */
+:root{--navy:#0c1930;--navy2:#1c3558;--gold:#d9b66e;--paper:#f4f6f9;--muted:#667085;--line:#e6eaf0;--shadow:0 14px 36px rgba(16,29,53,.08)}
+body{background:#f6f7fa;color:#172338;line-height:1.65}
+.topbar{font-size:12px;letter-spacing:.1px;padding:10px 16px;background:#081326}
+header{position:sticky;top:0;z-index:50;padding:14px max(18px,calc((100% - 1160px)/2));box-shadow:0 8px 24px #07152b24}
+.nav{max-width:1160px;margin:auto}.brand-ar{font-size:23px;letter-spacing:-.4px}
+.navlinks a{padding:9px 0;transition:color .2s}.navlinks a:hover{color:#f2d99f}
+.hero{padding:76px 20px 82px;background:radial-gradient(ellipse at 82% 15%,#d9b66e2b,transparent 28%),linear-gradient(118deg,#09162b 0%,#142b4b 62%,#1c3558 100%);position:relative;overflow:hidden}
+.hero-inner{max-width:1160px;grid-template-columns:1.45fr .75fr;gap:55px}
+.hero h1{font-weight:800;letter-spacing:-1px;line-height:1.28}
+.hero p{font-size:15px;line-height:2.1;color:#d8e0eb}
+.hero-note{background:linear-gradient(145deg,#ffffff14,#ffffff08);border:1px solid #ffffff30;box-shadow:0 20px 55px #0002;backdrop-filter:blur(8px);padding:28px}
+.hero-note strong{font-size:22px}.hero-note:before{content:"✦";display:block;color:var(--gold);font-size:30px;margin-bottom:14px}
+main{max-width:1160px}
+.section{padding:58px 0}
+.section-head{margin-bottom:26px}
+.section-head h2{font-size:28px;letter-spacing:-.5px}
+.section-head p{font-size:14px}
+#offers{padding-top:54px}
+#offers>.form-note{background:#fff8e9;border:1px solid #f0dfb8;color:#795b25;border-radius:12px;padding:12px 15px}
+.car-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:20px 0 22px}
+.car-filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{border:1px solid #dce2eb;background:#fff;color:#536176;border-radius:30px;padding:9px 15px;font-size:12px;font-weight:bold;transition:.2s}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.car-search{min-width:min(100%,250px);border:1px solid #dce2eb;background:#fff;border-radius:30px;padding:10px 16px;font:inherit;font-size:12px;outline:none}
+.car-search:focus{border-color:#b28b45;box-shadow:0 0 0 3px #d9b66e30}
+.car-count{font-size:12px;color:var(--muted);margin:0 0 12px}
+.car-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.car-card{border:1px solid #e8ebf1;border-radius:20px;box-shadow:0 5px 18px #14213a08;transition:transform .22s,box-shadow .22s;display:flex;flex-direction:column}
+.car-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.car-card img{height:190px;object-fit:cover;background:#e8edf3}
+.car-body{padding:19px;display:flex;flex-direction:column;flex:1}
+.car-body .tag{align-self:flex-start}
+.car-body h3{font-size:19px;margin:12px 0 5px}
+.car-body p{font-size:12px;min-height:22px;margin-bottom:13px}
+.car-price{padding-top:11px;border-top:1px solid #eef0f4}
+.car-price strong{font-size:23px}
+.car-rates{line-height:1.8;margin:7px 0 16px}
+.car-book{margin-top:auto;border-radius:11px;min-height:44px}
+.btn{transition:transform .18s,filter .18s}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.feature,.step{border:1px solid #e8ebf1;box-shadow:0 5px 18px #14213a06;border-radius:19px}
+.feature{padding:25px}.feature-icon{width:48px;height:48px;display:grid;place-items:center;background:#f7f0e2;border-radius:14px}
+.steps{gap:18px}.step{padding:24px}.num{letter-spacing:.5px}
+.location-panel{padding:32px;border-radius:22px;box-shadow:0 16px 36px #10213b18}
+.panel{border-radius:20px;box-shadow:var(--shadow)}
+.booking-form{gap:16px}.field input,.field select,.field textarea{border-color:#dfe4ec;padding:13px 14px}.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:#b58c47;box-shadow:0 0 0 3px #d9b66e28}
+#locationGate{background:#fbfcfe;border:1px dashed #d7deea;border-radius:16px;padding:22px}
+footer{line-height:2.2}
+@media(max-width:900px){.car-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-inner{gap:28px}}
+@media(max-width:600px){header{position:relative}.hero{padding:48px 18px 54px}.hero-inner{grid-template-columns:1fr}.hero-note{padding:20px}.car-grid{grid-template-columns:1fr;gap:15px}.car-card{display:grid;grid-template-columns:38% 1fr}.car-card img{height:100%;min-height:230px}.car-body{padding:14px}.car-body h3{font-size:16px}.car-body p{font-size:11px}.car-price strong{font-size:19px}.car-rates{font-size:11px}.car-book{padding:10px 8px;font-size:12px}.section{padding:42px 0}.section-head h2{font-size:24px}.car-tools{align-items:stretch}.car-search{width:100%}.navlinks{overflow-x:auto;justify-content:flex-start;white-space:nowrap;padding-bottom:3px}.navlinks a{padding:6px 0}.booking-form{grid-template-columns:1fr}.field.full{grid-column:auto}}
+
 </style>
 </head>
 <body>
@@ -37,6 +90,7 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <main>
 <section class="section" id="offers"><div class="section-head"><div><h2>عروض السيارات</h2><p>اختر الفئة المناسبة لك وتابع أحدث عروض التأجير.</p></div><span class="tag">العروض تُحدّث باستمرار</span></div>
 <p class="form-note" style="margin:0 0 16px">السيارات والأسعار التالية أمثلة استرشادية أضفتها لتجهيز شكل الموقع، وليست تأكيداً لتوفر سيارات فعلية أو أسعار نهائية. يتم تأكيد السيارة والسعر عند التواصل معك.</p>
+<div class="car-tools"><div class="car-filters" role="group" aria-label="تصفية السيارات"><button type="button" class="filter-btn active" data-filter="الكل">كل السيارات</button><button type="button" class="filter-btn" data-filter="اقتصادية">اقتصادية</button><button type="button" class="filter-btn" data-filter="سيدان">سيدان</button><button type="button" class="filter-btn" data-filter="عائلية / SUV">عائلية وSUV</button><button type="button" class="filter-btn" data-filter="فاخرة">فاخرة</button></div><input id="carSearch" class="car-search" type="search" placeholder="ابحث عن سيارة..." aria-label="ابحث عن سيارة"></div><p id="carCount" class="car-count" aria-live="polite">عرض السيارات المتاحة في القائمة</p>
 <div class="car-grid">
 <article class="car-card"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80" alt="سيارة سيدان رياضية"><div class="car-body"><span class="tag">اقتصادية</span><h3>تويوتا يارس</h3><p>موديل حديث · أوتوماتيك · 5 ركاب</p><div class="car-price"><strong>120 ر.س</strong><span>لليوم</span></div><div class="car-rates">الأسبوع: 750 ر.س · الشهر: 2,700 ر.س</div><a class="btn btn-gold car-book" href="#booking" data-category="اقتصادية">اطلب هذه الفئة</a></div></article>
 <article class="car-card"><img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80" alt="سيارة سيدان"><div class="car-body"><span class="tag">اقتصادية</span><h3>هيونداي أكسنت</h3><p>موديل حديث · أوتوماتيك · 5 ركاب</p><div class="car-price"><strong>130 ر.س</strong><span>لليوم</span></div><div class="car-rates">الأسبوع: 800 ر.س · الشهر: 2,900 ر.س</div><a class="btn btn-gold car-book" href="#booking" data-category="اقتصادية">اطلب هذه الفئة</a></div></article>
@@ -85,6 +139,28 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <script>
 const $=id=>document.getElementById(id);
 document.querySelectorAll(".car-book").forEach(link=>link.addEventListener("click",()=>{const category=link.dataset.category;const select=$("vehicleType");if(select)select.value=category;}));
+let activeCarFilter="الكل";
+function filterCars(){
+ const term=($("carSearch")?.value||"").trim().toLocaleLowerCase("ar");
+ let visible=0;
+ document.querySelectorAll(".car-card").forEach(card=>{
+  const category=card.querySelector(".tag")?.textContent.trim()||"";
+  const name=card.querySelector("h3")?.textContent||"";
+  const matchesCategory=activeCarFilter==="الكل"||category===activeCarFilter;
+  const matchesTerm=!term||(name+" "+category+" "+(card.querySelector("p")?.textContent||"")).toLocaleLowerCase("ar").includes(term);
+  const show=matchesCategory&&matchesTerm;
+  card.classList.toggle("hidden",!show);
+  if(show)visible++;
+ });
+ $("carCount").textContent="يعرض الموقع "+visible+" من "+document.querySelectorAll(".car-card").length+" سيارة";
+}
+document.querySelectorAll(".filter-btn").forEach(btn=>btn.addEventListener("click",()=>{
+ activeCarFilter=btn.dataset.filter;
+ document.querySelectorAll(".filter-btn").forEach(item=>item.classList.toggle("active",item===btn));
+ filterCars();
+}));
+$("carSearch").addEventListener("input",filterCars);
+filterCars();
 
 let watchId=null,sessionId=null,ownerToken=null,ownerMap=null,markers=new Map(),poller=null;
 function status(message){$("visitorStatus").textContent=message}
@@ -127,7 +203,8 @@ $("bookingForm").addEventListener("submit",async event=>{
 });
 $("pickupDate").min=new Date().toISOString().slice(0,10);
 $("pickupDate").addEventListener("change",()=>{$("returnDate").min=$("pickupDate").value;if($("returnDate").value&&$("returnDate").value<$("pickupDate").value)$("returnDate").value=$("pickupDate").value});
-\n$("start").addEventListener("click",async()=>{
+
+$("start").addEventListener("click",async()=>{
  if(!window.isSecureContext){status("يلزم فتح الموقع عبر اتصال آمن HTTPS لتفعيل تحديد الموقع.");return}
  if(!navigator.geolocation){status("متصفحك لا يدعم تحديد الموقع.");return}
  $("start").disabled=true;status("بانتظار إذن الموقع من المتصفح…");
@@ -154,7 +231,8 @@ function ownerFetch(url,opts={}){return fetch(url,{...opts,headers:{...(opts.hea
 async function refreshOwner(){
  try{
   const r=await ownerFetch("/api/owner/sessions");if(!r.ok)throw new Error();const data=await r.json();
-  $("ownerStatus").textContent=data.sessions.length?"عدد المشاركات النشطة: "+data.sessions.length:"لا توجد مشاركات نشطة حالياً.";\n  const br=await ownerFetch("/api/owner/bookings");const bd=br.ok?await br.json():{bookings:[]};$("bookingList").innerHTML="";bd.bookings.forEach(b=>{const el=document.createElement("div");el.className="session";const details=document.createElement("div");details.textContent=b.name+" · "+b.phone+" · "+b.vehicleType+" · "+b.pickupDate+" إلى "+b.returnDate;const loc=document.createElement("a");loc.href="https://www.openstreetmap.org/?mlat="+encodeURIComponent(b.latitude)+"&mlon="+encodeURIComponent(b.longitude)+"#map=16/"+b.latitude+"/"+b.longitude;loc.target="_blank";loc.rel="noopener";loc.textContent="عرض موقع الطلب على الخريطة";const del=document.createElement("button");del.className="stop";del.textContent="حذف الطلب";del.addEventListener("click",async()=>{await ownerFetch("/api/owner/bookings/"+b.id,{method:"DELETE"});refreshOwner()});el.append(details,loc,del);$("bookingList").append(el)});
+  $("ownerStatus").textContent=data.sessions.length?"عدد المشاركات النشطة: "+data.sessions.length:"لا توجد مشاركات نشطة حالياً.";
+  const br=await ownerFetch("/api/owner/bookings");const bd=br.ok?await br.json():{bookings:[]};$("bookingList").innerHTML="";bd.bookings.forEach(b=>{const el=document.createElement("div");el.className="session";const details=document.createElement("div");details.textContent=b.name+" · "+b.phone+" · "+b.vehicleType+" · "+b.pickupDate+" إلى "+b.returnDate;const loc=document.createElement("a");loc.href="https://www.openstreetmap.org/?mlat="+encodeURIComponent(b.latitude)+"&mlon="+encodeURIComponent(b.longitude)+"#map=16/"+b.latitude+"/"+b.longitude;loc.target="_blank";loc.rel="noopener";loc.textContent="عرض موقع الطلب على الخريطة";const del=document.createElement("button");del.className="stop";del.textContent="حذف الطلب";del.addEventListener("click",async()=>{await ownerFetch("/api/owner/bookings/"+b.id,{method:"DELETE"});refreshOwner()});el.append(details,loc,del);$("bookingList").append(el)});
   const alive=new Set();data.sessions.forEach(s=>{alive.add(s.id);const point=[s.latitude,s.longitude];if(!markers.has(s.id)){markers.set(s.id,L.marker(point).addTo(ownerMap))}else markers.get(s.id).setLatLng(point);markers.get(s.id).bindPopup("آخر تحديث: "+new Date(s.updatedAt).toLocaleString("ar-SA"))});
   for(const [id,m] of markers)if(!alive.has(id)){ownerMap.removeLayer(m);markers.delete(id)}
   $("sessions").innerHTML="";data.sessions.forEach(s=>{const el=document.createElement("div");el.className="session";const time=document.createElement("small");time.textContent="آخر تحديث: "+new Date(s.updatedAt).toLocaleString("ar-SA");const btn=document.createElement("button");btn.className="stop";btn.textContent="إنهاء هذه المشاركة";btn.addEventListener("click",async()=>{await ownerFetch("/api/owner/sessions/"+s.id,{method:"DELETE"});refreshOwner()});el.append(time,btn);$("sessions").append(el)});
