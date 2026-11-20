@@ -239,8 +239,8 @@ async function refreshOwner(){
   if(data.sessions.length===1)ownerMap.setView([data.sessions[0].latitude,data.sessions[0].longitude],15);else if(data.sessions.length>1){const group=L.featureGroup([...markers.values()]);ownerMap.fitBounds(group.getBounds().pad(.2))}
  }catch(e){$("ownerStatus").textContent="تعذر الوصول إلى لوحة المتابعة. تحقق من رابط المالك."}
 }
-function openOwner(token){ownerToken=token;$("owner").classList.remove("hidden");$("booking").classList.add("hidden");$("location").classList.add("hidden");$("offers").classList.add("hidden");$("services").classList.add("hidden");$("steps").classList.add("hidden");ownerMap=L.map("map").setView([24.7,46.7],5);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(ownerMap);history.replaceState(null,"",location.pathname);refreshOwner();poller=setInterval(refreshOwner,5000)}
-const token=location.hash.startsWith("#")?decodeURIComponent(location.hash.slice(1)):"";if(token.length>=32)openOwner(token);
+function openOwner(token){ownerToken=token;$("owner").classList.remove("hidden");$("booking").classList.add("hidden");$("location").classList.add("hidden");$("offers").classList.add("hidden");$("services").classList.add("hidden");$("steps").classList.add("hidden");if(ownerMap){ownerMap.remove()}ownerMap=L.map("map").setView([24.7,46.7],5);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(ownerMap);requestAnimationFrame(()=>ownerMap.invalidateSize(true));setTimeout(()=>ownerMap&&ownerMap.invalidateSize(true),350);history.replaceState(null,"",location.pathname);refreshOwner();poller=setInterval(refreshOwner,5000)}
+const rawOwnerHash=location.hash.startsWith("#")?decodeURIComponent(location.hash.slice(1)):"";const token=rawOwnerHash.startsWith("owner=")?rawOwnerHash.slice(6):rawOwnerHash;if(token.length>=32)openOwner(token);
 </script>
 </body></html>
 <!-- deployment sync: refresh Render after storefront polish -->
