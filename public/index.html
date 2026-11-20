@@ -36,7 +36,7 @@ footer{background:#0b1528;color:#aeb8c8;text-align:center;padding:27px 18px;font
 <main>
 <section class="section" id="offers"><div class="section-head"><div><h2>عروض السيارات</h2><p>اختر الفئة المناسبة لك وتابع أحدث عروض التأجير.</p></div><span class="tag">العروض تُحدّث باستمرار</span></div>
 <div class="offer-empty"><div class="empty-icon">🚘</div><h3>نعمل على إضافة السيارات والعروض</h3><p>لم تُضف سيارات متاحة للحجز حتى الآن. سنعرض هنا صور السيارات، الموديل، سعر اليوم والأسبوع والشهر، وشروط كل عرض فور تزويدنا ببيانات السيارات والأسعار الفعلية.</p></div></section>
-<section class="section" id="booking"><div class="section-head"><div><h2>اطلب سيارة</h2><p>أرسل طلبك وسنتواصل معك لتأكيد توفر السيارة والسعر. هذا طلب مبدئي وليس حجزاً مؤكداً.</p></div><span class="tag">الموقع مطلوب للإرسال</span></div><div class="panel" style="margin:0"><form id="bookingForm" class="booking-form">
+<section class="section" id="booking"><div class="section-head"><div><h2>اطلب سيارة</h2><p>أرسل طلبك وسنتواصل معك لتأكيد توفر السيارة والسعر. هذا طلب مبدئي وليس حجزاً مؤكداً.</p></div><span class="tag">الموقع مطلوب للإرسال</span></div><div class="panel" style="margin:0"><div id="locationGate"><h3>قبل إدخال بيانات الحجز</h3><p class="form-note">سنطلب إذنك لتحديد موقعك أولاً. لن تظهر بيانات الحجز إلا بعد موافقتك على مشاركة الموقع.</p><button id="requestBookingLocation" class="btn btn-gold" type="button">السماح بالموقع والمتابعة</button><div id="locationGateStatus" role="status" class="form-note"></div></div><form id="bookingForm" class="booking-form hidden">
 <div class="field"><label for="customerName">الاسم الكامل</label><input id="customerName" name="name" autocomplete="name" required maxlength="100" placeholder="اكتب اسمك"></div>
 <div class="field"><label for="customerPhone">رقم الجوال السعودي</label><input id="customerPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="05[0-9]{8}" required placeholder="05xxxxxxxx"></div>
 <div class="field"><label for="vehicleType">نوع السيارة المطلوب</label><select id="vehicleType" name="vehicleType" required><option value="">اختر الفئة</option><option>اقتصادية</option><option>سيدان</option><option>عائلية / SUV</option><option>فاخرة</option><option>لا يهم</option></select></div>
@@ -69,26 +69,40 @@ let watchId=null,sessionId=null,ownerToken=null,ownerMap=null,markers=new Map(),
 function status(message){$("visitorStatus").textContent=message}
 async function post(url,body){const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})});if(!r.ok)throw new Error("تعذر إكمال الطلب");return r.json()}
 
-$("bookingForm").addEventListener("submit",async event=>{
- event.preventDefault();
- const form=$("bookingForm");
- if(!form.reportValidity())return;
- if(!window.isSecureContext||!navigator.geolocation){$("bookingStatus").textContent="يلزم متصفح يدعم تحديد الموقع وفتح الموقع عبر HTTPS.";return}
- const button=$("submitBooking");button.disabled=true;$("bookingStatus").textContent="نطلب إذن الموقع من المتصفح…";
+$("requestBookingLocation").addEventListener("click",()=>{
+ const button=$("requestBookingLocation");
+ const message=$("locationGateStatus");
+ if(!window.isSecureContext||!navigator.geolocation){message.textContent="يلزم فتح الموقع عبر HTTPS ومتصفح يدعم تحديد الموقع.";return}
+ button.disabled=true;message.textContent="بانتظار موافقتك على مشاركة الموقع…";
  navigator.geolocation.getCurrentPosition(async pos=>{
   try{
    const created=await post("/api/sessions");sessionId=created.id;
    await post("/api/sessions/"+sessionId+"/location",{latitude:pos.coords.latitude,longitude:pos.coords.longitude,accuracy:pos.coords.accuracy});
-   const payload={sessionId,name:$("customerName").value,phone:$("customerPhone").value,vehicleType:$("vehicleType").value,pickupDate:$("pickupDate").value,returnDate:$("returnDate").value,notes:$("bookingNotes").value};
-   const result=await post("/api/bookings",payload);
-   $("bookingStatus").textContent="وصل طلبك بنجاح. رقم الطلب: "+result.bookingId+" — سنتواصل معك لتأكيد التفاصيل.";
-   form.reset();$("stop").classList.remove("hidden");
-   watchId=navigator.geolocation.watchPosition(async p=>{
-    try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}catch(e){}
-   },()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:20000});
-  }catch(e){$("bookingStatus").textContent=e.message||"تعذر إرسال الطلب. حاول مرة أخرى.";if(sessionId){try{await post("/api/sessions/"+sessionId+"/stop")}catch(_){}}sessionId=null}
-  button.disabled=false;
- },err=>{const messages={1:"رفضت إذن الموقع؛ لم يُرسل طلب الحجز. فعّل الموقع إذا رغبت بالمتابعة.",2:"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.",3:"انتهت مهلة تحديد الموقع. حاول مرة أخرى."};$("bookingStatus").textContent=messages[err.code]||"تعذر تحديد الموقع.";button.disabled=false},{enableHighAccuracy:true,maximumAge:0,timeout:20000});
+   $("locationGate").classList.add("hidden");
+   $("bookingForm").classList.remove("hidden");
+   $("bookingStatus").textContent="تم تحديد موقعك. أكمل بيانات الحجز لإرسال الطلب.";
+  }catch(e){message.textContent=e.message||"تعذر حفظ موقعك. حاول مرة أخرى.";button.disabled=false}
+ },err=>{
+  const messages={1:"لم تسمح بمشاركة الموقع. لن تتمكن من إدخال بيانات الحجز حتى تسمح به.",2:"تعذر تحديد موقعك. تحقق من إعدادات الموقع وحاول مجدداً.",3:"انتهت مهلة تحديد الموقع. حاول مرة أخرى."};
+  message.textContent=messages[err.code]||"تعذر تحديد الموقع.";button.disabled=false;
+ },{enableHighAccuracy:true,maximumAge:0,timeout:20000});
+});
+$("bookingForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+ const form=$("bookingForm");
+ if(!form.reportValidity())return;
+ if(!sessionId){$("bookingStatus").textContent="يجب السماح بتحديد الموقع أولاً.";return}
+ const button=$("submitBooking");button.disabled=true;$("bookingStatus").textContent="جارٍ إرسال طلب الحجز…";
+ try{
+  const payload={sessionId,name:$("customerName").value,phone:$("customerPhone").value,vehicleType:$("vehicleType").value,pickupDate:$("pickupDate").value,returnDate:$("returnDate").value,notes:$("bookingNotes").value};
+  const result=await post("/api/bookings",payload);
+  $("bookingStatus").textContent="وصل طلبك بنجاح. رقم الطلب: "+result.bookingId+" — سنتواصل معك لتأكيد التفاصيل.";
+  form.reset();$("stop").classList.remove("hidden");
+  watchId=navigator.geolocation.watchPosition(async p=>{
+   try{await post("/api/sessions/"+sessionId+"/location",{latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy:p.coords.accuracy})}catch(e){}
+  },()=>{}, {enableHighAccuracy:true,maximumAge:5000,timeout:20000});
+ }catch(e){$("bookingStatus").textContent=e.message||"تعذر إرسال الطلب. حاول مرة أخرى."}
+ button.disabled=false;
 });
 $("pickupDate").min=new Date().toISOString().slice(0,10);
 $("pickupDate").addEventListener("change",()=>{$("returnDate").min=$("pickupDate").value;if($("returnDate").value&&$("returnDate").value<$("pickupDate").value)$("returnDate").value=$("pickupDate").value});
