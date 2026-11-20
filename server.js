@@ -70,11 +70,11 @@ app.post("/api/bookings", (req, res) => {
     return res.status(403).json({ error: "يلزم تفعيل الموقع الجغرافي قبل إرسال طلب الحجز" });
   }
   const cleanName = typeof name === "string" ? name.trim().slice(0, 100) : "";
-  const cleanPhone = typeof phone === "string" ? phone.replace(/[\\s-]/g, "").slice(0, 20) : "";
+  const cleanPhone = typeof phone === "string" ? phone.replace(/[\s-]/g, "").slice(0, 20) : "";
   const allowedTypes = ["اقتصادية", "سيدان", "عائلية / SUV", "فاخرة", "لا يهم"];
-  if (!cleanName || !/^05\\d{8}$/.test(cleanPhone) || !allowedTypes.includes(vehicleType) ||
-      !/^\\d{4}-\\d{2}-\\d{2}$/.test(pickupDate || "") ||
-      !/^\\d{4}-\\d{2}-\\d{2}$/.test(returnDate || "") || returnDate < pickupDate) {
+  if (!cleanName || !/^05\d{8}$/.test(cleanPhone) || !allowedTypes.includes(vehicleType) ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(pickupDate || "") ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(returnDate || "") || returnDate < pickupDate) {
     return res.status(400).json({ error: "تحقق من الاسم والجوال ونوع السيارة وتواريخ الإيجار" });
   }
   const id = crypto.randomUUID();
